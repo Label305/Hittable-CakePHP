@@ -33,12 +33,16 @@ class HittableTest extends CakeTestCase {
 	 * @return void
 	 */
 	public function initController($controllerName) {
-        $CakeRequest = new CakeRequest();
-        $CakeResponse = new CakeResponse();
-        $this->Controller = new $controllerName($CakeRequest, $CakeResponse);
 
-        $this->Controller->constructClasses();
-        $this->Controller->startupProcess();
+    Configure::write('Security.salt', '8sdgwhi56lhs3kh23a4r2lafhmjhnf54kuhm4w5c');
+    Configure::write('Security.cipherSeed', '922107460123958703413098562346');
+
+    $CakeRequest = new CakeRequest();
+    $CakeResponse = new CakeResponse();
+    $this->Controller = new $controllerName($CakeRequest, $CakeResponse);
+
+    $this->Controller->constructClasses();
+    $this->Controller->startupProcess();
 	}
 
     /**
