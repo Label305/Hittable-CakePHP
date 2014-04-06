@@ -2,6 +2,16 @@
 App::uses('AuthComponent', 'Controller/Component');
 /**
  * The Hittable behavior allows for registering hits on a model
+ * 
+ * @author Joris Blaak <joris@label305.com>
+ * @requires CakePHP 2.x
+ *
+ * Copyright (c) 2014 Label305. All Rights Reserved.
+ *
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
  */
 class HittableBehavior extends ModelBehavior {
 

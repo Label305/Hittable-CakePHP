@@ -1,0 +1,25 @@
+
+{
+    "name": "label305/hittable",
+    "version": "1.0.0",
+    "description": "Behavior for registering hits",
+    "type": "cakephp-plugin",
+    "homepage": "http://www.label305.com",
+    "keywords": [
+        "cakephp", 
+        "component", 
+        "hits",
+        "seo"
+        ],
+    "authors": [
+        {
+            "name": "Joris Blaak",
+            "role": "Developer",
+            "email": "joris@label305.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3",
+        "composer/installers": "*"
+    }
+}
