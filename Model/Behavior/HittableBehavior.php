@@ -23,7 +23,8 @@ class HittableBehavior extends ModelBehavior {
 	 * @var array
 	 */
 	public $settings = array(
-		'referenceTime' => null
+		'referenceTime' => null,
+		'automatic' => false
 		);
 
 	/**
@@ -50,13 +51,18 @@ class HittableBehavior extends ModelBehavior {
 	/**
 	 * Register a simple hit
 	 * @param  Model $model
+	 * @param  integer $id  (optional)
 	 * @return array|boolean
 	 */
-	public function registerHit(Model $model) {
+	public function registerHit(Model $model, $id = null) {
+		if(is_null($id)) {
+			$id = $model->id;
+		}
+
 		$this->Hit->create();
 		return $this->Hit->save(array(
 			'model' => $model->alias,
-			'foreign_key' => $model->id,
+			'foreign_key' => $id,
 			'user_id' => AuthComponent::User('id')
 			));
 	}
@@ -81,6 +87,22 @@ class HittableBehavior extends ModelBehavior {
 		$options = Hash::merge($defaults, $options);
 
 		return $this->Hit->find($type, $options);
+	}
+
+	/**
+	 * Automatic regsitering of hits
+	 * @param  array  $results 
+	 * @param  boolean $primary 
+	 * @return void
+	 */
+	public function afterFind(Model $model, $results, $primary = false) {
+		if($this->settings['automatic'] && $primary) {
+			foreach($results as $result) {
+				if(!empty($result[$model->alias][$model->primaryKey])) {
+					$this->registerHit($model, $result[$model->alias][$model->primaryKey]);
+				}
+			}
+		}
 	}
 
 	/**

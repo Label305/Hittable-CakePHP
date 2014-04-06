@@ -122,15 +122,20 @@ class HittableTest extends CakeTestCase {
     	$result = $this->Page->registerHit();
     	$result = $this->Page->registerHit();
 
+      //Regsiter hit with specific page
+      $result = $this->Page->registerHit(1);
+
     	//Three with specific page
   		$this->Page->id = 1;
     	$result = $this->Page->registerHit();
-    	$result = $this->Page->registerHit();
-    	$result = $this->Page->registerHit();
+      $result = $this->Page->registerHit();
+
+      //Register hit for other page
+    	$result = $this->Page->registerHit(2);
     	
     	//Find count of all
     	$result = $this->Page->hits();
-    	$this->assertEquals($result, 5, 'Invalid hit count');
+    	$this->assertEquals($result, 6, 'Invalid hit count');
     	
     	//Find count of page 1
     	$result = $this->Page->hits('count', array(
@@ -140,5 +145,37 @@ class HittableTest extends CakeTestCase {
     		));
     	$this->assertEquals($result, 3, 'Invalid hit count');
   	}
+
+    /**
+     * Automatic hitting will register after each find query
+     * @return void
+     */
+    public function testAutomaticHit() {
+      $this->setUp();
+      $this->bindBehavior(array('automatic' => true));
+
+      //Will register hits on all
+      $this->Page->find('all');
+
+      //Will register hit on only Page with id 1
+      $this->Page->find('first');
+
+      //Find count of page 1
+      $result = $this->Page->hits('count', array(
+        'conditions' => array(
+          'Page.id' => 1
+          )
+        ));
+      $this->assertEquals($result, 2, 'Invalid hit count');
+
+      //Find count of page 2
+      $result = $this->Page->hits('count', array(
+        'conditions' => array(
+          'Page.id' => 2
+          )
+        ));
+      $this->assertEquals($result, 1, 'Invalid hit count');
+
+    }
 
 }
