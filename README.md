@@ -12,9 +12,30 @@ Add the repository to your requirements and load using composer
     }
 ```
 
+To install the corresponding `hits` table, run `schema create --plugin=Hittable` in the Cake shell
+
 ## Usage
 
-TODO
+Load `Hittable.Hittable` as behavior in the model you want to have hits registered for. After this you can register hits like:
+
+```php
+	$this->Page->id = 1;
+	$this->Page->registerHit();
+```
+
+Which will result in an entry in the hits table.
+
+To retrieve the hits you can use the `hits` call like you've been used to with `find`. For example:
+
+```php
+	$this->Page->hits('count', array(
+		'conditions' => array(
+			'Page.id' => 1
+		)
+	));
+```
+
+will return the number of hits on Page with id 1, note that this call is internally handled by calling find on the Hit model which has a belongsTo association that handle the conditions.
 
 ## License
 
