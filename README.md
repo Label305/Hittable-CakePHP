@@ -16,6 +16,8 @@ To install the corresponding `hits` table, run `schema create --plugin=Hittable`
 
 ## Usage
 
+### Basic
+
 Load `Hittable.Hittable` as behavior in the model you want to have hits registered for. After this you can register hits like:
 
 ```php
@@ -36,6 +38,18 @@ To retrieve the hits you can use the `hits` call like you've been used to with `
 ```
 
 will return the number of hits on Page with id 1, note that this call is internally handled by calling find on the Hit model which has a belongsTo association that handle the conditions.
+
+### Automatic
+
+If you want to set and forget it is possible to turn on automatic registering of hits. You can turn this on by settings the `automatic` settings while loading:
+
+```php
+	$actsAs = array(
+		'Hittable.Hittable' => array(
+			'automatic' => true
+		)
+	);
+``` 
 
 ## License
 
