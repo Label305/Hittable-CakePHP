@@ -3,7 +3,7 @@ php:
 - 5.3
 env:
   global:
-  - PLUGIN_NAME=PermissionsComponent
+  - PLUGIN_NAME=Hittable
   - REQUIRE="cakephp/debug_kit:2.2.* cakedc/search:dev-develop"
   - DB=mysql CAKE_VERSION=2.4
 before_script:
