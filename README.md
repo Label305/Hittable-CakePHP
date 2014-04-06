@@ -1,4 +1,4 @@
-# CakePHP Hittable Behavior
+# CakePHP Hittable Behavior [![Build Status](https://travis-ci.org/Label305/CakePHP-Hittable.svg?branch=master)](https://travis-ci.org/Label305/CakePHP-Hittable)
 
 For registering hits on models
 
