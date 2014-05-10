@@ -8,6 +8,9 @@ env:
   - PLUGIN_NAME=Hittable
   - REQUIRE="cakephp/debug_kit:2.2.* cakedc/search:dev-develop"
   - DB=mysql CAKE_VERSION=2.4
+before_install:
+  - pear config-set auto_discover 1
+  - travis_retry pear install pear.phpunit.de/PHPUnit-3.7.30
 before_script:
 - git clone https://github.com/FriendsOfCake/travis.git --depth 1 ../travis
 - ../travis/before_script.sh

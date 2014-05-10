@@ -1,5 +1,6 @@
 <?php
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('CakeSession', 'Model/Datasource');
 /**
  * The Hittable behavior allows for registering hits on a model
  * 
@@ -59,10 +60,14 @@ class HittableBehavior extends ModelBehavior {
 			$id = $model->id;
 		}
 
+		//Make sure a session is started
+		CakeSession::start();	
+
 		$this->Hit->create();
 		return $this->Hit->save(array(
 			'model' => $model->alias,
 			'foreign_key' => $id,
+			'session_id' => CakeSession::id(),
 			'user_id' => AuthComponent::User('id')
 			));
 	}
